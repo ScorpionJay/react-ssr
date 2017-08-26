@@ -112,5 +112,12 @@ react提供挂了renderToString的方法
 
 client项目可以单独
 
+
+
+### 服务器渲染图片
+
+使用asset-require-hook钩子
+https://github.com/aribouius/asset-require-hook
+
 ## REF
 http://andrewhfarmer.com/server-side-render/

@@ -8,6 +8,7 @@ require('babel-register')({
 })
 
 
+
 const app = require('./app.js')
 const views = require('koa-views')
 const route = require('koa-route')
@@ -34,6 +35,12 @@ require('css-modules-require-hook')({
         }).css,
     camelCase: true,
     generateScopedName: '[name]__[local]__[hash:base64:8]'
+})
+
+// Image required hook
+require('asset-require-hook')({
+    extensions: ['jpg', 'png', 'gif', 'webp'],
+    limit: 8000
 })
 
 app.use(convert(devMiddleware(compile, {

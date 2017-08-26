@@ -30,7 +30,7 @@ class Recommod extends Component {
           
           <Slider data={data.banner} />
 
-         
+          <img src={require('../images/test.jpg')} />
            
          
 

@@ -63,7 +63,7 @@ module.exports = function (options){
                   })
                 },
                 {
-                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    test: /\.(jpe?g|png|gif|svg|ico)$/i,
                     use: ['file-loader?name=image/[hash].[ext]?']
                 }
             ]
