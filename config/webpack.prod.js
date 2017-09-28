@@ -34,7 +34,7 @@ module.exports = {
                       cacheDirectory: true,
                       babelrc: false,
                       presets: [
-                        ['latest', { es2015: { modules: false } }],
+                        ['env', { es2015: { modules: false } }],
                         'react',
                         'stage-3'
                       ],

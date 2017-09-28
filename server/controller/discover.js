@@ -1,10 +1,19 @@
+const request = require('request')
+
 const banner = async (ctx,next) => {
-    let a = [{
-      imgurl:'http://p4.music.126.net/MD1Rxeu4O21KQ9SBgx0EBQ==/18880813672319248.jpg',
-      },
-      {imgurl:'http://p3.music.126.net/1EZqWQYmxlzRU3iAJo-_Qw==/18660911348461171.jpg'}
-    ]
-   ctx.body = JSON.stringify(a)
+    let data = await requestP('http://localhost:8889/banner')
+    ctx.body =  data
 }
+
+// 封装 Ajax，返回一个 Promise
+const requestP = (url) => (
+  new Promise(function(resolve, reject) {
+      request(url ,function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                 resolve(body)
+              }
+      })
+  })
+)
 
 export default banner

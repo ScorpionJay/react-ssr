@@ -1,5 +1,13 @@
 # react技术栈
 
+## how to run
+
+~~~
+npm i 
+npm run devnpm 
+~~~
+
+
 ## 服务器渲染 SSR (Server-Side Rendering)
 
  ### 什么是SSR
