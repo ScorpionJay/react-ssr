@@ -13,7 +13,7 @@ import './sass/main.scss'
 
 // 渲染
 render(
-  <Provider store={configureStore()}>
+  <Provider store={configureStore(window.REDUX_STATE)}>
     <BrowserRouter>
       <Route  path="/" component={App} />
     </BrowserRouter>
@@ -30,7 +30,7 @@ import { AppContainer } from 'react-hot-loader';
 const renderIndex = Component => {
   render(
   	 <AppContainer>
-	<Provider store={configureStore()}>
+	<Provider store={configureStore(window.REDUX_STATE)}>
 	    <BrowserRouter>
 	      <Route  path="/" component={App} />
 	    </BrowserRouter>
@@ -41,7 +41,7 @@ const renderIndex = Component => {
   );
 };
 
-renderIndex(App);
+// renderIndex(App);
 
 if (module.hot) {
   module.hot.accept(() => renderIndex(Root));

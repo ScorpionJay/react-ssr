@@ -19,9 +19,9 @@
   "author": "Jay",
   "license": "MIT",
   "repository": {
-        "type": "git",
-        "url": "https://github.com/ScorpionJay/react-ssr"
-    },
+    "type": "git",
+    "url": "https://github.com/ScorpionJay/react-ssr"
+  },
   "dependencies": {
     "babel-plugin-transform-assets": "^0.2.0",
     "ejs": "^2.5.6",

@@ -129,3 +129,15 @@ https://github.com/aribouius/asset-require-hook
 
 ## REF
 http://andrewhfarmer.com/server-side-render/
+
+
+~~~
+这段配置什么个意思???
+node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+},
+target: 'web'
+~~~

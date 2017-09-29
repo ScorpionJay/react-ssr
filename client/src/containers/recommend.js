@@ -8,12 +8,24 @@ import { homeAction } from '../actions/home'
 import Slider from '../components/common/slider'
 import RecommendList from '../components/music/recommendList'
 
+
+
 class Recommod extends Component {
+
+
+  componentWillMount(){
+    const { dispatch,data} = this.props
+    //if( !data.recommendMusics.length > 0){
+      if( !data.banner.length > 0){
+        dispatch(homeAction(1))
+      }
+    //}
+  }
 
   componentDidMount(){
     const { dispatch,data} = this.props
     //if( !data.recommendMusics.length > 0){
-     dispatch(homeAction(data,1))
+     //dispatch(homeAction(data,1))
     //}
   }
 

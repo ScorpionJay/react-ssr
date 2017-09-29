@@ -4,7 +4,7 @@ require('source-map-support').install()
 
 require('babel-register')({
     presets: [
-        ['env'
+        ['env',{loose:true}
         //,
         // {
         //   "targets": {
@@ -49,7 +49,8 @@ require('css-modules-require-hook')({
 // Image required hook
 require('asset-require-hook')({
     extensions: ['jpg', 'png', 'gif', 'webp'],
-    limit: 8000
+    limit: 8000,
+    name: '/[hash].[ext]'
 })
 
 app.use(convert(devMiddleware(compile, {

@@ -56,7 +56,7 @@ module.exports = {
                 },
                 {
                     test: /\.(jpe?g|png|gif|svg)$/i,
-                    use: ['file-loader?name=image/[hash].[ext]?']
+                    use: ['file-loader?name=[hash].[ext]']
                 },
                 {
                     test: /\.html$/,
@@ -94,5 +94,12 @@ module.exports = {
                     }),
                     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
                     new ProgressBarPlugin({summary: false})
-        ]
+        ],
+        node: {
+            dgram: 'empty',
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        },
+        target: 'web'
 }

@@ -11,6 +11,7 @@ import djradio from './djradio'
 import playlist from './playlist'
 import rank from './rank'
 
+
 const navArray = ['个性推荐','歌单','排行榜','主播电台']
 
 class App extends Component {
