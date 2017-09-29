@@ -34,9 +34,8 @@ module.exports = {
                       cacheDirectory: true,
                       babelrc: false,
                       presets: [
-                        ['env', { es2015: { modules: false } }],
-                        'react',
-                        'stage-3'
+                        ['env', { modules: false }],
+                        'react'
                       ],
                       plugins: ['react-hot-loader/babel','transform-runtime' ]
                     }

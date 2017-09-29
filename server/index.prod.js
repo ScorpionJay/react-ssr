@@ -3,7 +3,7 @@ require('babel-polyfill')
 require('source-map-support').install()
 
 require('babel-register')({
-    presets: ['es2015', 'react', 'stage-3'],
+    presets: ['env', 'react'],
     plugins: ['add-module-exports']
 })
 
