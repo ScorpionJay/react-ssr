@@ -16,17 +16,19 @@ class Recommod extends Component {
   componentWillMount(){
     const { dispatch,data} = this.props
     //if( !data.recommendMusics.length > 0){
-      if( !data.banner.length > 0){
-        dispatch(homeAction(1))
-      }
+      // if( !data.banner.length > 0){
+      // if(typeof window == 'undefined'){
+      //   dispatch(homeAction())
+      // }
+      // }
     //}
   }
 
   componentDidMount(){
     const { dispatch,data} = this.props
-    //if( !data.recommendMusics.length > 0){
-     //dispatch(homeAction(data,1))
-    //}
+    if( !data.banner.length > 0){
+     dispatch(homeAction())
+    }
   }
 
  // <div className='recommod'>

@@ -4,26 +4,17 @@ require('source-map-support').install()
 
 require('babel-register')({
     presets: [
-        ['env',{loose:true}
-        //,
-        // {
-        //   "targets": {
-        //     "node": "current"
-        //   }
-        // }
-        ], 
+        ['env',{loose:true}], 
         'react'],
     plugins: ['add-module-exports']
 })
-
-
 
 const app = require('./app.js')
 const views = require('koa-views')
 const route = require('koa-route')
 const path = require('path')
 const fs = require('fs')
-const clientRoute = require('./clientRoute.js')
+const reactRoute = require('./reactRoute.js')
 
 const webpack = require('webpack')
 const devMiddleware = require('koa-webpack-dev-middleware')
@@ -92,7 +83,7 @@ app.use( route.get('/test', async (ctx,next) => {
 
 
 
-app.use(clientRoute)
+app.use(reactRoute)
 
 const discover = require('./controller/discover')
 app.use( route.get('/api/banner', discover))

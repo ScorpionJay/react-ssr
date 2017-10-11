@@ -1,10 +1,25 @@
+/**
+* 生产环境webpack配置
+*/
+
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const fs = require('fs')
 
-module.exports = {
+function getExternals() {
+    return fs.readdirSync(path.resolve(__dirname, '../node_modules'))
+        .filter(filename => !filename.includes('.bin'))
+        .reduce((externals, filename) => {
+            externals[filename] = `commonjs ${filename}`
+            return externals
+        }, {})
+}
+
+// 客户端配置
+let clientConfig = {
         context: path.join(__dirname, ".."),
         entry: {
             bundle: [
@@ -37,7 +52,7 @@ module.exports = {
                         ['env', { modules: false }],
                         'react'
                       ],
-                      plugins: ['react-hot-loader/babel','transform-runtime' ]
+                      plugins: ['transform-runtime']
                     }
                 },
                 {
@@ -68,12 +83,11 @@ module.exports = {
                         filename: '[name].[hash:5].js'
                     }),
                     new webpack.optimize.UglifyJsPlugin({
-                      compress: {
-                        warnings: false
-                      }
+                        compress: {warnings: false},
+                        output: {
+                          comments: false,
+                        },
                     }),
-                    new webpack.HotModuleReplacementPlugin(),
-                    new webpack.NamedModulesPlugin(),
                     new HtmlWebpackPlugin({
                         filename: path.join(__dirname, "../server/view/prod/index.html"),
                         template: path.join(__dirname, "../server/view/tpl/index.html"),
@@ -85,5 +99,68 @@ module.exports = {
                     }),
                     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
                     new ProgressBarPlugin({summary: false})
-        ]
+        ],
+        node: {
+            dgram: 'empty',
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        },
+        target: 'web'
 }
+
+// 服务端配置
+let serverConfig = {
+        context: path.join(__dirname, ".."),
+        entry: {
+            server: './server/index.prod'
+        },
+        output: {
+            path: path.join(__dirname, "../dist/server"),
+            filename: '[name].js',
+            // chunkFilename: 'chunk.[name].js'
+        },
+        module: {
+            rules: [ 
+                {
+                    test: /\.js?$/,
+                    loader: 'babel-loader',
+                    // include: [srcDir],
+                    exclude: /(node_modules)/,
+                    options: {
+                      presets: [
+                        ['env',{
+                            "node": "current",
+                             // modules: false
+                          }],
+                          'react'
+                      ],
+                      plugins: ['transform-runtime','add-module-exports']
+                    }
+                },
+                {
+                    test: /\.(jpe?g|png|gif|svg)$/i,
+                    use: ['file-loader?name=image/[hash].[ext]?']
+                },
+                { test: /\.scss$/, 
+                  use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader","sass-loader"],
+                    publicPath: "/"
+                  })
+                }
+            ]
+        },
+        plugins: [
+                    new webpack.optimize.UglifyJsPlugin({
+                        compress: {warnings: false},
+                        comments: false
+                    }),
+                    new ProgressBarPlugin({summary: false})
+        ],
+        externals: getExternals(),
+        target: 'node'
+}
+
+module.exports = [clientConfig, serverConfig]
+

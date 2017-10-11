@@ -127,17 +127,11 @@ client项目可以单独
 使用asset-require-hook钩子
 https://github.com/aribouius/asset-require-hook
 
+
+
+
+## 时序图
+![时序图](http://odyv5xg88.bkt.clouddn.com/react-ssr.png)
+
 ## REF
 http://andrewhfarmer.com/server-side-render/
-
-
-~~~
-这段配置什么个意思???
-node: {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-},
-target: 'web'
-~~~

@@ -4,9 +4,9 @@
   "description": "react server-side rendering",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon ./server/index.js --watch server --watch config",
+    "dev": "cross-env NODE_ENV=development nodemon ./server/index.dev.js --watch server --watch config",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./config/webpack.prod.js",
-    "start": "cross-env NODE_ENV=production node  ./server/index.prod.js",
+    "start": "node ./dist/server/server.js",
     "clean": "rimraf ./dist"
   },
   "keywords": [
@@ -14,7 +14,7 @@
     "react-router",
     "redux",
     "webpack",
-    "koa2"
+    "koa"
   ],
   "author": "Jay",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "koa-compress": "^2.0.0",
     "koa-route": "^3.2.0",
     "koa-static": "^3.0.0",
-    "koa-views": "^6.0.2",
+    "koa-views": "^6.1.1",
     "path": "^0.12.7",
     "rc-slider": "^8.0.2",
     "react": "^16.0.0",

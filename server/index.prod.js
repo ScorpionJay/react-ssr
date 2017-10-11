@@ -1,59 +1,39 @@
-require('babel-polyfill')
-
-require('source-map-support').install()
-
-require('babel-register')({
-    presets: ['env', 'react'],
-    plugins: ['add-module-exports']
-})
-
-
-const app = require('./app.js')
+/**
+* koa2 server
+*/
+const Koa = require('koa')
+const logger = require('koa-logger')
+const compress = require('koa-compress')
 const views = require('koa-views')
 const route = require('koa-route')
-const static = require('koa-static')
+const koaStatic = require('koa-static')
 const path = require('path')
-const fs = require('fs')
-const clientRoute = require('./clientRoute.js')
+const reactRoute = require('./reactRoute.js')
 
+const app = new Koa()
+app.use(logger())
+app.use(compress())
 
-const port = 3000
+const port = 4000
 
+app.use(views(path.resolve(process.cwd(), './server/view/prod'), {map: {html: 'ejs'}}))
+app.use(koaStatic('./dist/client'))
 
-require('css-modules-require-hook')({
-    extensions: ['.scss'],
-    preprocessCss: (data, filename) =>
-        require('node-sass').renderSync({
-            data,
-            file: filename
-        }).css,
-    camelCase: true,
-    generateScopedName: '[name]__[local]__[hash:base64:8]'
-})
-
-app.use( views(path.join(__dirname, './view/prod'), {
-  map: {
-    html: 'ejs'
-  }
-}))
-app.use(static(path.resolve(__dirname, '../dist/client')))
-
+// for test
 app.use( route.get('/test', async (ctx,next) => {
     await ctx.render('index', {
-       	root: 'jay'
+        root: 'jay',
+        state: 'hello'
     })
 }))
 
-
-
-app.use(clientRoute)
-
+// rest api
 const discover = require('./controller/discover')
 app.use( route.get('/api/banner', discover))
 
-
-
+app.use(reactRoute)
 
 app.listen(port,()=>{
-	console.log(' server started, bind port %d',port)
+    console.log(' server started, bind port %d',port)
 });
+

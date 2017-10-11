@@ -29,20 +29,24 @@ const requestP = (url) => (
   })
 )
 
-export function homeAction(page){
+import configureStore from '../stores'
+
+export function homeAction(){
 	return async dispatch => {
 	 	// dispatch(spin());
 	 	try{
+	 		const store = configureStore({})
 	 		let data ={}
-	 		console.log('fffff',request)
-	 		if(request){
+	 		console.log(1)
+	 		if(typeof window == 'undefined'){
 				let a = await requestP('http://localhost:8889/banner')
-				console.log(a)
+				console.log(2)
 				data.banner = JSON.parse(a)
 		 		//data.recommendMusics = [] page ===1 ? musicList.data.data : d.recommendMusics.concat( musicList.data.data )
 			 	dispatch(home(data))
 
 	 		}else{
+	 			console.log(3)
 	 			let banner = await api( Config.bannerAPI )
 		 		//let musicList = await api( `${Config.albumAPI}/${page}` )
 		 		data.banner = banner
