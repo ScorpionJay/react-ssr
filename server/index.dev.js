@@ -1,10 +1,14 @@
+/**
+ * 开发环境server配置
+ */
+
 require('babel-polyfill')
 
 require('source-map-support').install()
 
 require('babel-register')({
     presets: [
-        ['env',{loose:true}], 
+        ['env', { loose: true }],
         'react'],
     plugins: ['add-module-exports']
 })
@@ -50,7 +54,7 @@ app.use(convert(devMiddleware(compile, {
     historyApiFallback: true,
     publicPath: config.output.publicPath
 })))
-app.use(convert(hotMiddleware(compile,{
+app.use(convert(hotMiddleware(compile, {
     path: '/__webpack_hmr'
 })));
 
@@ -69,15 +73,15 @@ compile.plugin('emit', (compilation, callback) => {
     callback()
 })
 
-app.use( views(path.join(__dirname, './view/dev'), {
-  map: {
-    html: 'ejs'
-  }
+app.use(views(path.join(__dirname, './view/dev'), {
+    map: {
+        html: 'ejs'
+    }
 }))
 
-app.use( route.get('/test', async (ctx,next) => {
+app.use(route.get('/test', async (ctx, next) => {
     await ctx.render('index', {
-       	root: 'jay'
+        root: 'jay'
     })
 }))
 
@@ -86,11 +90,11 @@ app.use( route.get('/test', async (ctx,next) => {
 app.use(reactRoute)
 
 const discover = require('./controller/discover')
-app.use( route.get('/api/banner', discover))
+app.use(route.get('/api/banner', discover))
 
 
 
 
-app.listen(port,()=>{
-	console.log(' server started, bind port %d',port)
+app.listen(port, () => {
+    console.log(' server started, bind port %d', port)
 });
