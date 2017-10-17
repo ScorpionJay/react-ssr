@@ -1,0 +1,30 @@
+.recommend{
+    flex:1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+
+    .recommend-tab{
+        line-height: 2.5rem;
+        color:#333;
+    }
+
+    .recommend-tab:before{
+        content:'';
+        border:.1rem solid #ce3d3e;
+        background-color:#ce3d3e;
+        margin-right: .5rem;
+    }
+
+    .recommend-tab:after{
+        content: '';
+        border-width: .5rem;
+        border-top:.1rem solid #666;
+        border-right:.1rem solid #666;
+        width: .7rem;
+        height: .7rem;
+        display: inline-block;
+        transform: rotate(45deg); 
+    }
+}

@@ -13,6 +13,26 @@ require('babel-register')({
     plugins: ['add-module-exports']
 })
 
+
+// sass hook
+require('css-modules-require-hook')({
+    extensions: ['.scss'],
+    preprocessCss: (data, filename) =>
+        require('node-sass').renderSync({
+            data,
+            file: filename
+        }).css,
+    camelCase: true,
+    generateScopedName: '[name]__[local]__[hash:base64:8]'
+})
+
+// image hook
+require('asset-require-hook')({
+    extensions: ['jpg', 'png', 'gif', 'webp'],
+    limit: 8000,
+    name: '/[hash].[ext]'
+})
+
 const app = require('./app.js')
 const views = require('koa-views')
 const route = require('koa-route')
@@ -25,28 +45,10 @@ const devMiddleware = require('koa-webpack-dev-middleware')
 const hotMiddleware = require('koa-webpack-hot-middleware')
 const convert = require('koa-convert')
 
-const config = require('../config/webpack.dev')
+const config = require('../build/webpack.dev')
 const compile = webpack(config)
 
 const port = 3000
-
-require('css-modules-require-hook')({
-    extensions: ['.scss'],
-    preprocessCss: (data, filename) =>
-        require('node-sass').renderSync({
-            data,
-            file: filename
-        }).css,
-    camelCase: true,
-    generateScopedName: '[name]__[local]__[hash:base64:8]'
-})
-
-// Image required hook
-require('asset-require-hook')({
-    extensions: ['jpg', 'png', 'gif', 'webp'],
-    limit: 8000,
-    name: '/[hash].[ext]'
-})
 
 app.use(convert(devMiddleware(compile, {
     noInfo: true,
@@ -90,8 +92,8 @@ app.use(route.get('/test', async (ctx, next) => {
 app.use(reactRoute)
 
 const discover = require('./controller/discover')
-app.use(route.get('/api/banner', discover))
-
+app.use(route.get('/api/banner', discover.banner))
+app.use(route.get('/api/music', discover.music))
 
 
 

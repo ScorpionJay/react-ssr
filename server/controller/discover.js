@@ -5,7 +5,12 @@ const banner = async (ctx, next) => {
     ctx.body = data
 }
 
-// 封装 Ajax，返回一个 Promise
+const music = async (ctx, next) => {
+    let data = await requestP('http://localhost:8889/music')
+    ctx.body = data
+}
+
+// 封装 request 返回一个 Promise
 const requestP = (url) => (
     new Promise(function (resolve, reject) {
         request(url, function (error, response, body) {
@@ -17,4 +22,4 @@ const requestP = (url) => (
     })
 )
 
-export default banner
+export default {banner,music}

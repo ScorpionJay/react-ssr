@@ -5,10 +5,9 @@
 import React, { Component, PropTypes } from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
-import configureStore from '../client/src/stores'
 import { Router, StaticRouter } from 'react-router'
-
-import App from '../client/src/app'
+import App from '../common/container/app'
+import configureStore from '../common/store'
 
 const request = require('request')
 
@@ -27,32 +26,44 @@ const clientRoute = async (ctx, next) => {
     console.log('url', ctx.url)
     const url = ctx.url
     let store = {};
-    if (url.indexOf('discover') != -1) {
-        let data = await requestP('http://localhost:8889/api/banner')
-        console.log(data)
-        store = configureStore(//{}
-            { "home": { "home": { "banner": JSON.parse(data) } } }
-        )
-    } else {
-        store = configureStore({}
-        )
-    }
+    if(url.indexOf('api') === -1){
+        if (url.indexOf('discover') != -1) {
+            let data = await requestP('http://localhost:8889/banner')
+            let music = await requestP('http://localhost:8889/music')
+            console.log(data)
+            // 这里是否用action
 
-    // console.log(store.getState())
-    const context = {}
-    const html = renderToString(
-        <Provider store={store}>
-            <StaticRouter location={ctx.req.url} context={context}>
-                <App />
-            </StaticRouter>
-        </Provider>
-    )
-    // console.log(html)
-    await ctx.render('index', {
-        root: html,
-        state: store.getState()
-    })
-    await next()
+
+            store = configureStore(//{}
+                { "recommend": { 
+                    "recommend": { "banner": JSON.parse(data),
+                                    "recommendMusics":JSON.parse(music)
+                                 }
+                    } 
+                }
+            )
+        } else {
+            store = configureStore({}
+            )
+        }
+
+        console.log(store.getState())
+        const context = {}
+        const html = renderToString(
+            <Provider store={store}>
+                <StaticRouter location={ctx.req.url} context={context}>
+                    <App />
+                </StaticRouter>
+            </Provider>
+        )
+        // console.log(html)
+        await ctx.render('index', {
+            root: html,
+            state: store.getState()
+        })
+    }else{
+        await next()
+    }
 }
 
 export default clientRoute
