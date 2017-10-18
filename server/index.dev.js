@@ -1,16 +1,31 @@
 /**
- * 开发环境server配置
+ * devloper server config
  */
 
+// 转换新的api
 require('babel-polyfill')
 
+// map
 require('source-map-support').install()
 
+// 钩子函数，将es6转成es5
 require('babel-register')({
     presets: [
-        ['env', { loose: true }],
-        'react'],
-    plugins: ['add-module-exports']
+        [
+            'env',
+            {
+                'targets': {
+                    'node': 'current'
+                }
+            }
+
+        ],
+        'react'
+    ],
+    plugins: [
+        // import require不统一问题
+        'add-module-exports'
+    ]
 })
 
 
@@ -38,14 +53,13 @@ const views = require('koa-views')
 const route = require('koa-route')
 const path = require('path')
 const fs = require('fs')
-const reactRoute = require('./reactRoute.js')
-
 const webpack = require('webpack')
 const devMiddleware = require('koa-webpack-dev-middleware')
 const hotMiddleware = require('koa-webpack-hot-middleware')
 const convert = require('koa-convert')
-
 const config = require('../build/webpack.dev')
+const reactRoute = require('./reactRoute.js')
+
 const compile = webpack(config)
 
 const port = 3000
@@ -75,28 +89,26 @@ compile.plugin('emit', (compilation, callback) => {
     callback()
 })
 
+// ejs 模版
 app.use(views(path.join(__dirname, './view/dev'), {
     map: {
         html: 'ejs'
     }
 }))
 
-app.use(route.get('/test', async (ctx, next) => {
-    await ctx.render('index', {
-        root: 'jay'
-    })
-}))
+// redirect
+app.use(route.get('/', ctx => ctx.response.redirect('/discover/recommend')))
+app.use(route.get('/discover', ctx => ctx.response.redirect('/discover/recommend')))
 
-
-
+// react路由
 app.use(reactRoute)
 
+// api
 const discover = require('./controller/discover')
 app.use(route.get('/api/banner', discover.banner))
 app.use(route.get('/api/music', discover.music))
 
 
-
 app.listen(port, () => {
     console.log(' server started, bind port %d', port)
-});
+})

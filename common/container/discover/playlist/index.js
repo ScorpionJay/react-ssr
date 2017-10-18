@@ -18,7 +18,6 @@ class Playlist extends Component {
 		}
 	}
 
-
 	shouldComponentUpdate(nextProps, nextState){
 		return this.props.data !== nextProps.data
 	}

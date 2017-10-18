@@ -17,9 +17,9 @@ export function playlistAction(d) {
         dispatch(spin())
         try {
             let page = d.page + 1
-            let musicList = await api(Config.musicListAPI, 'get', { page: page, json: true })
+            let musicList = await api(Config.musicListAPI)
             let data = {}
-            data.playlist = d.page === 0 ? musicList.plist.list.info : d.playlist.concat(musicList.plist.list.info)
+            data.playlist =  musicList //d.page === 0 ? musicList.plist.list.info : d.playlist.concat(musicList.plist.list.info)
             data.page = page
             dispatch(playlist(data))
             dispatch(spinHidden())

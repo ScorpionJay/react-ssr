@@ -1,9 +1,14 @@
 /**
  * 
  */
+import a from './configureStore.prod'
+// import b from './configureStore.dev'
+// if (process.env.NODE_ENV === 'production') {
+  
+//   export  default a
+// }else {
+  
+//   export  default b
+// }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./configureStore.prod')
-}else {
-  module.exports = require('./configureStore.dev')
-}
+export  default a

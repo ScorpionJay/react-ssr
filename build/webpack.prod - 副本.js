@@ -48,7 +48,13 @@ let clientConfig = {
                     cacheDirectory: true,
                     babelrc: false,
                     presets: [
-                        ['env', { modules: false }],
+                        ['env', {
+                            "targets": {
+                                "chrome": 40
+                            },
+                            modules: false
+                        }
+                        ],
                         'react'
                     ],
                     plugins: ['transform-runtime']
@@ -100,6 +106,7 @@ let clientConfig = {
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
         new ProgressBarPlugin({ summary: false })
     ],
+    resolve: { extensions: ['.js', '.scss'] },
     node: {
         dgram: 'empty',
         fs: 'empty',
@@ -108,8 +115,6 @@ let clientConfig = {
     },
     target: 'web'
 }
-
-console.log('asdfadf', path.resolve(__dirname))
 
 // 服务端配置
 let serverConfig = {
@@ -137,13 +142,19 @@ let serverConfig = {
                         [
                             'env',
                             {
-                                "node": "current",
-                                // modules: false
+                                "targets": {
+                                    // "chrome": 50,
+                                    "node": "current",
+                                    uglify :true
+                                },
+                                modules: false,
+                                "useBuiltIns": true
+                                
                             }
                         ],
                         'react'
                     ],
-                    plugins: ['transform-runtime', 'add-module-exports']
+                    plugins: ['add-module-exports']
                 }
             },
             {
@@ -166,14 +177,15 @@ let serverConfig = {
             disable: false,
             allChunks: true
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false },
-            comments: false
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: { warnings: false },
+        //     comments: false
+        // }),
         new ProgressBarPlugin({ summary: false })
     ],
+    resolve: { extensions: ['.js', '.scss'] },
     externals: getExternals()
 }
 
-module.exports = [clientConfig, serverConfig]
-
+// module.exports = [clientConfig, serverConfig]
+module.exports = [serverConfig]
