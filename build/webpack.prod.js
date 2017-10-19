@@ -66,7 +66,18 @@ let clientConfig = {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: ["css-loader", "sass-loader"],
+                    use: ["css-loader",
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                ident: 'postcss',
+                                plugins: [
+                                    // require('postcss-import')(),
+                                    require('autoprefixer')(),
+                                ]
+                            }
+                        }
+                        , "sass-loader"],
                     publicPath: "/"
                 })
             }
