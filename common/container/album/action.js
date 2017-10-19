@@ -15,11 +15,11 @@ export function albumAction(id) {
         dispatch(spin())
         try {
             let data = await api(Config.playListAPI.replace('id', id));
-            let d = {
-                list: data.list.list.info,
-                info: data.info.list
-            }
-            dispatch(album(d))
+            // let d = {
+            //     list: data.list.list.info,
+            //     info: data.info.list
+            // }
+            dispatch(album(data))
             dispatch(spinHidden())
         } catch (error) {
             console.log('error', error);

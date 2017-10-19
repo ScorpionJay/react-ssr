@@ -18,7 +18,7 @@ export default class Album extends Component {
     return (
       <div style={Styles.container}>
         {
-          imgU ? 　<div style={Object.assign(Styles.mask, { backgroundImage: `url(${imgU})` })}></div> 　: null
+          imgU ? 　<div style={{ backgroundImage: `url(${imgU})` }}  className='mask'></div> 　: <div></div>
         }
 
         <div style={Styles.intro}>

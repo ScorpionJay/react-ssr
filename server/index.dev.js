@@ -107,7 +107,8 @@ app.use(reactRoute)
 const discover = require('./controller/discover')
 app.use(route.get('/api/banner', discover.banner))
 app.use(route.get('/api/music', discover.music))
-
+app.use(route.get('/api/album/*', discover.album))
+app.use(route.get('/api/musicDetail/*', discover.musicDetail))
 
 app.listen(port, () => {
     console.log(' server started, bind port %d', port)

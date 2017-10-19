@@ -24,8 +24,8 @@ const clientRoute = async (ctx, next) => {
                 {
                     "recommend": {
                         "recommend": {
-                            "banner": JSON.parse(data),
-                            "recommendMusics": JSON.parse(music)
+                            "banner": JSON.parse(data).data.info,
+                            "recommendMusics": JSON.parse(music).plist.list.info.slice(0,6)
                         }
                     }
                 }
@@ -36,8 +36,23 @@ const clientRoute = async (ctx, next) => {
                 {
                     "playlist": {
                         "playlist": {
-                            "playlist": JSON.parse(music)
+                            "playlist": JSON.parse(music).plist.list.info
                         }
+                    }
+                }
+            )
+        }else if (url.indexOf('/discover/album/') != -1) {
+            let id = url.substring(url.lastIndexOf('/')+1)
+            let music = await request( config.playListAPI.replace('id', id))
+            let data = JSON.parse(music)
+            let d = {
+                list: data.list.list.info,
+                info: data.info.list
+            }
+            store = configureStore(
+                {
+                    "album": {
+                        "album": d
                     }
                 }
             )
@@ -45,7 +60,7 @@ const clientRoute = async (ctx, next) => {
             store = configureStore()
         }
 
-        console.log(JSON.stringify(store.getState()))
+        // console.log(JSON.stringify(store.getState()))
         const html = renderToString(
             <Provider store={store}>
                 <StaticRouter location={ctx.req.url} context={{}}>

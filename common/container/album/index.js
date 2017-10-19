@@ -13,9 +13,12 @@ import AlbumComponent from '../../component/album/album'
 class Album extends Component {
 
 	componentDidMount() {
-		const { dispatch } = this.props
+		const { dispatch,data } = this.props
 		const id = this.props.match.params.id
-		dispatch(albumAction(id))
+		if( data.info.specialid != id ){
+			dispatch(albumAction(id))
+		}
+		
 	}
 
 	render() {

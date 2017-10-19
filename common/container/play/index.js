@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Slider from 'rc-slider'
 import { PlayBtn, StopBtn, ListBtn, PreBtn, NextBtn } from '../../component/music/musicBtn'
-// import 'rc-slider/assets/index.css'
+import './index.scss'
 import { currentMusicAPI, changetimeAPI, controllAPI, changeMusicAPI } from './action'
 
 import Format from '../../util/format'

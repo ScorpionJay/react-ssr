@@ -50,34 +50,34 @@ export function currentMusicAPI(id, firstTime) {
 	return async dispatch => {
 		// dispatch(spin());
 		try {
-			let data = await api(Config.musicAPI.replace('HASH', id));
-			let krc = await api(Config.krcAPI.replace('HASH', id).replace('TIMELENGTH', data.timeLength + '000'), 'get', {}, { 'Accept': 'text/html' });
-			let krcArray = []
-			krc.split('\n').map((item, index) => {
-				let t = item.substring(1, item.indexOf(']'))
-				let tt = parseInt(t.substring(0, t.indexOf(':'))) * 60 + parseFloat(t.substring(t.indexOf(':') + 1))
-				krcArray.push({
-					time: tt,
-					str: item.substring(item.indexOf(']') + 1),
-					index: index
-				})
-			})
-			krcArray.pop()
+			let data = await api(Config.musicDetail.replace('HASH', id));
+			//let krc = await api(Config.krcAPI.replace('HASH', id).replace('TIMELENGTH', data.timeLength + '000'), 'get', {}, { 'Accept': 'text/html' });
+			// let krcArray = []
+			// krc.split('\n').map((item, index) => {
+			// 	let t = item.substring(1, item.indexOf(']'))
+			// 	let tt = parseInt(t.substring(0, t.indexOf(':'))) * 60 + parseFloat(t.substring(t.indexOf(':') + 1))
+			// 	krcArray.push({
+			// 		time: tt,
+			// 		str: item.substring(item.indexOf(']') + 1),
+			// 		index: index
+			// 	})
+			// })
+			// krcArray.pop()
 
-			let music = {
-				krc: krcArray,
-				hash: id,
-				url: data.url,
-				singerName: data.singerName,
-				songName: data.songName,
-				imgUrl: data.imgUrl,
-				duration: data.timeLength
-			}
+			// let music = {
+			// 	krc: krcArray,
+			// 	hash: id,
+			// 	url: data.url,
+			// 	singerName: data.singerName,
+			// 	songName: data.songName,
+			// 	imgUrl: data.imgUrl,
+			// 	duration: data.timeLength
+			// }
 			dispatch(musicBoxAddAPI({
 				hash: data.hash,
 				name: data.songName
 			}))
-			dispatch(currentMusic(music));
+			dispatch(currentMusic(data));
 			if (!firstTime) {
 				dispatch(controllAPI('play'))
 			} else {

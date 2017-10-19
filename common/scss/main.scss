@@ -131,3 +131,8 @@ html,body {
     -webkit-overflow-scrolling: touch;
 }
 
+.mask {
+    height: 13.5rem;
+    width: 100%;
+    filter: blur(60px)
+  }

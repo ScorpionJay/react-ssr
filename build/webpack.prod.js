@@ -109,8 +109,6 @@ let clientConfig = {
     target: 'web'
 }
 
-console.log('asdfadf', path.resolve(__dirname))
-
 // 服务端配置
 let serverConfig = {
     context: path.resolve(__dirname, ".."),
@@ -138,7 +136,7 @@ let serverConfig = {
                             'env',
                             {
                                 "node": "current",
-                                // modules: false
+                                // "modules": false
                             }
                         ],
                         'react'
