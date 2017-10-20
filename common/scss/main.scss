@@ -6,37 +6,33 @@ body{
 	max-width: 640px;
 	margin: 0 auto;
 	box-shadow: 0 0 160px 0 #5c99e7;
-
 }
 
 body,html{
 	height:100%;
+	font-size:18px;
+}
+
+@media screen and (max-width:800px){
+	html,body {
+	   font-size:16px;
+	}
+}
+@media screen and (max-width: 680px){
+html,body {
+		font-size:14px;
+	}
+}
+
+@media screen and (max-width: 375px){
+html,body {
+		font-size:12px;
+	}
 }
 
 a{
 	text-decoration: none;
 	color:#666
-}
-
-html,body {
-    font-size:18px;
-}
-
-@media screen and (max-width:800px){
- html,body {
-    font-size:16px;
- }
-}
-@media screen and (max-width: 680px){
- html,body {
-    font-size:14px;
- }
-}
-
-@media screen and (max-width: 375px){
- html,body {
-    font-size:12px;
- }
 }
 
 .root {
@@ -46,7 +42,6 @@ html,body {
     height: 100%;
     width:100%;
 }
-
 
 .fade-appear {
     opacity: 0;
@@ -63,7 +58,6 @@ html,body {
 	transition-duration: 300ms;
 	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
 }
-
 
 .fade-exit {
 	opacity: 0;
@@ -91,8 +85,6 @@ html,body {
 	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
 }
 
-
-
 .fade,.fade>div{
 	display: flex;
 	flex:1;
@@ -104,11 +96,8 @@ html,body {
 /* App */
 #app,.app-container{
 	display: flex;
-	flex-direction: column;
-	height: 100%;
-	width:100%;
+	flex:1;
 	background-color: #fff;
-
 
 	.app-content{
 		display: flex;
@@ -127,9 +116,10 @@ html,body {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 100%;
+	width: 100%;
     -webkit-overflow-scrolling: touch;
 }
+
 
 .mask {
     height: 13.5rem;

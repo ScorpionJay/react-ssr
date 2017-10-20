@@ -24,13 +24,11 @@ class Recommend extends Component {
 		const { data } = this.props
 		return (
 			<div className='recommend'>
-				<div>
 					<Slider data={this.props.data.banner} />
 					<div className='recommend-tab'>推荐歌单</div>
 					<div className='container'>
 						<List {...this.props} data={this.props.data.recommendMusics} />
 					</div>
-				</div>
 			</div>
 		)
 	}

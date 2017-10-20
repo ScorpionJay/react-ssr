@@ -13,7 +13,7 @@ const path = require('path')
 const app = require('./app.js')
 const reactRoute = require('./reactRoute.js')
 
-const port = 4000
+const port = 5000
 
 app.use(views(path.resolve(__dirname, '../dist/server'), { map: { html: 'ejs' } }))
 app.use(koaStatic(path.resolve(__dirname, '../dist/client')))

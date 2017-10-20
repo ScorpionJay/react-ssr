@@ -1,0 +1,23 @@
+.alert{
+    position: fixed;
+    // background: red;
+    color:#333;
+    top:0px;
+    bottom:0;
+    left:0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    >span{
+        background: #8B8787;
+        width: 10rem;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius:5px;
+    }
+}

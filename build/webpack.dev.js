@@ -22,7 +22,13 @@ module.exports = {
             'react-dom',
             'redux',
             'react-redux'
-        ]
+        ],
+        
+    },
+    externals: {
+        // require("jquery") is external and available
+        //  on the global var jQuery
+        'jsencrypt': 'window.jsencrypt',
     },
     output: {
         path: path.join(__dirname, "../dist"),
@@ -81,7 +87,6 @@ module.exports = {
             }
         ]
     },
-    // postcss: [autoprefixer()],
     plugins: [
         new ExtractTextPlugin({
             filename: "css/style.css",

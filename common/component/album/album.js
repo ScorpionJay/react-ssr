@@ -16,7 +16,7 @@ export default class Album extends Component {
     let { specialname, intro, imgurl, playcount } = this.props.data.info
     let imgU = imgurl.replace('{size}', 400)
     return (
-      <div style={Styles.container}>
+      <div className='container' >
         {
           imgU ? 　<div style={{ backgroundImage: `url(${imgU})` }}  className='mask'></div> 　: <div></div>
         }
@@ -45,6 +45,7 @@ const Styles = {
   container: {
     display: 'flex',
     flex: 1,
+    height:'auto',
     flexDirection: 'column',
   },
   intro: {

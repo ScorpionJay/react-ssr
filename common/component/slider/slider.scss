@@ -1,4 +1,10 @@
 /* Slider */
+
+.slideDiv{
+    max-width: 640px;
+    height:auto;
+
+
 .slick-slider
 {
     position: relative;
@@ -189,4 +195,6 @@
 .slick-dots li.slick-active
 {
     background-color: red
+}
+
 }

@@ -24,6 +24,7 @@ import Bundle from '../component/bundle'
 import Audio from '../component/music/audio'
 import Album from './album/'
 import Play from './play'
+import Login from './login'
 
 import Spin from '../component/common/spin'
 
@@ -130,6 +131,7 @@ class Main extends Component {
 							<Route path='/account' component={Account} />
 							<Route path='/play/:id' component={Play} />
 							<Route path='/play' component={Play} />
+							<Route path='/Login' component={Login} />
 							<Route render={() => (<Redirect to="/discover" />)} />
 						</Switch>
 					</div>

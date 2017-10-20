@@ -1,0 +1,193 @@
+.login{
+    
+    
+        .item{
+            display: flex;
+            line-height: 2.5rem;
+            border: .1rem solid #C8C7CC;
+            justify-content: space-around;
+            align-items:center;
+            margin: .5rem 1rem;
+            padding: .5rem 1rem;
+            border-radius: .5rem;
+    
+    
+            .mobile,.pwd{
+                order: 2;
+                flex:2;
+                padding: 0 .8rem;
+                color:#B3B3B3;
+                height: 2rem;
+            }
+    
+            i{
+                order: 1
+            }
+    
+            .clear,[class^='pwd-eye']{
+                order: 3;
+            }
+    
+            .clear{
+                background-image: url('./image/clear.png');
+                width: 2rem;
+                height: 2rem;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+    
+            .pwd-eye-close{
+                background-image: url('./image/eye-close.png');
+                width: 2rem;
+                height: 2rem;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+    
+            .pwd-eye-open{
+                background-image: url('./image/eye-open.png');
+                width: 2rem;
+                height: 2rem;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+        }
+    
+        
+    
+        .mobile-icon{
+            background-image: url('./image/mobile.png');
+            width: 2rem;
+            height: 2rem;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+    
+        .pwd-icon{
+            background-image: url('./image/pwd.png');
+            width: 2rem;
+            height: 2rem;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+    
+        input{
+            border: none;
+            outline: none;
+        }
+    
+        .mobile:focus  + i{
+            background-image: url('./image/mobile-active.png');
+            color:red
+        }
+    
+        .pwd:focus  + i{
+            background-image: url('./image/pwd-active.png');
+        }
+    
+        .mobile:focus  + i + i{
+            display: block
+        }
+        .pwd:focus  + i + i{
+            display: block
+        }
+    
+        .forget{
+            display: flex;
+            flex-direction: row-reverse;
+            text-decoration: underline;
+            padding-right: 1.2rem;
+            margin-top: 1rem;
+            color:#8C8C8C;
+            font-size: 1rem;
+        }
+    
+        .login-btn{
+            background: #FFB923;
+            padding: 1rem;
+            text-align: center;
+            margin:1rem 1rem;
+            color:#fff;
+            border-radius: .5rem;
+            font-size: 1.2rem;
+        }
+    
+        .register-btn{
+            color: #FFB923;
+            padding: 1rem;
+            text-align: center;
+            margin:.5rem 1rem;
+            background:#fff;
+            border: 0.1rem solid #FFB923;
+            border-radius: 2rem;
+            font-size: 1.2rem;
+        }
+    
+    
+        .circle{
+            height: 13rem;
+            width:100%;
+            background: linear-gradient(#FFB923, #FFC80A);
+            position: relative;
+            text-align: center;
+    
+            .pic{
+                margin-top: 3rem;
+                width: 100%;
+                position: absolute;
+                z-index: 10;
+                display: flex;
+                justify-content: center;
+    
+                div{
+                    width:6.5rem;
+                    height:6.5rem;
+                    background-image: url('./image/外发光.png');
+                    background-size: 100% 100%;
+                    background-repeat: no-repeat;
+                    text-align: center;
+    
+                    img{
+                        width: 6rem;
+                        height: 6rem;
+                    }
+                }
+    
+               
+            }
+    
+            .circle2{
+                width: 100%;
+                border-top: 4rem solid #fff;
+                border-top-left-radius: 100%;
+                border-top-right-radius: 100%;
+                // transform: rotate(180deg);
+                position: absolute;
+                bottom: -.1rem
+            }
+    
+            .login-tab{
+                line-height: 3rem;
+                color:#fff;
+                font-size: 1.2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                >div{
+                    flex:1
+                }
+    
+                >div:nth-child(1){
+                    display: flex;
+    
+                    i{
+                        margin-left: 1rem
+                    }
+                }
+            }
+    
+        }
+    
+        
+    }
