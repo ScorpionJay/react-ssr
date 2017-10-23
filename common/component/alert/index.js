@@ -1,5 +1,5 @@
 import React from 'react'
-import './style'
+import './style.scss'
 
 const Alert = ({data}) => (
     <div className='alert'>

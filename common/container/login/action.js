@@ -18,7 +18,7 @@ export const loginAction = (mobile,pwd,callback) => async dispatch => {
 
     // console.log(a)
     // let data = await request( '../mock/login.json','get',encryptData )
-    let data = await request( '/api/test','post',encryptData )
+    let data = await request( '/api/login','post',encryptData )
 
     callback(data)
     dispatch(login({ data }))

@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 // import Tab from '../tab'
 import Validate from '../../util/validate'
-import './style'
+import './style.scss'
 
 import Alert from '../../component/alert'
 
@@ -85,7 +85,7 @@ export default class Login extends Component {
 
                     <div className='pic'>
                         <div>
-                            <img src={require('./image/头像.png')} />
+                            <img src={require('./image/logo.jpg')} />
                         </div>
                     </div>
                     <div className='circle2'>
@@ -113,7 +113,7 @@ export default class Login extends Component {
                 <div className='forget'>忘记密码？</div>
 
                 <div className='login-btn' onClick={() => this.login()}>登录</div>
-                <div className='register-btn'>注册领1660元</div>
+                <div className='register-btn'>注册</div>
 
 
 

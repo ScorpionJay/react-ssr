@@ -110,6 +110,9 @@ app.use(route.get('/api/music', discover.music))
 app.use(route.get('/api/album/*', discover.album))
 app.use(route.get('/api/musicDetail/*', discover.musicDetail))
 
+const login = require('./controller/login')
+app.use(route.post('/api/login', login.login))
+
 app.listen(port, () => {
     console.log(' server started, bind port %d', port)
 })

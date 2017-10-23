@@ -28,7 +28,7 @@ module.exports = {
     externals: {
         // require("jquery") is external and available
         //  on the global var jQuery
-        'jsencrypt': 'window.jsencrypt',
+        //'jsencrypt': 'window.jsencrypt',
     },
     output: {
         path: path.join(__dirname, "../dist"),

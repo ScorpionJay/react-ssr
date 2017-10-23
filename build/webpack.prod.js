@@ -34,7 +34,7 @@ let clientConfig = {
     },
     output: {
         path: path.resolve(__dirname, "../dist/client"),
-        //publicPath: "http://localhost:9003/", // 设置cdn或nginx url
+        publicPath: '/',//"http://localhost:9003/", // 设置cdn或nginx url
         filename: '[name].js',
         chunkFilename: 'chunk.[name].js'
     },

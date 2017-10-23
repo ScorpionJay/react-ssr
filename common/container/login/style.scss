@@ -103,7 +103,7 @@
         }
     
         .login-btn{
-            background: #FFB923;
+            background: rgb(255, 35, 53);
             padding: 1rem;
             text-align: center;
             margin:1rem 1rem;
@@ -113,12 +113,12 @@
         }
     
         .register-btn{
-            color: #FFB923;
+            color: rgb(243, 57, 57);
             padding: 1rem;
             text-align: center;
             margin:.5rem 1rem;
             background:#fff;
-            border: 0.1rem solid #FFB923;
+            border: 0.1rem solid rgb(252, 70, 70);
             border-radius: 2rem;
             font-size: 1.2rem;
         }
@@ -127,7 +127,7 @@
         .circle{
             height: 13rem;
             width:100%;
-            background: linear-gradient(#FFB923, #FFC80A);
+            background: linear-gradient(rgb(248, 81, 89), rgb(168, 4, 18));
             position: relative;
             text-align: center;
     
@@ -150,6 +150,7 @@
                     img{
                         width: 6rem;
                         height: 6rem;
+                        border-radius: 50%
                     }
                 }
     
