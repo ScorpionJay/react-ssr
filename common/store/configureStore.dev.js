@@ -3,6 +3,8 @@ import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import reducers from '../reducer'
 
+
+import {login} from '../container/login/action'
 // import DevTools from '../container/DevTools'
 // import {persistState} from 'redux-devtools'
 
@@ -70,6 +72,15 @@ const store = function (initialState) {
 		});
 	}
 
+
+	if( typeof window != 'undefined'){
+		let storage = require('../util/storage').default
+		let token = storage.get('token')
+		if( token ){
+			store.dispatch(login(JSON.parse(token)))
+		}
+		
+	}
 
 	return store
 }

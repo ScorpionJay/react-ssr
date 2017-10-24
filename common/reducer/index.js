@@ -10,10 +10,13 @@ import album from '../container/album/reducer'
 import music from '../container/play/reducer'
 import spin from './spin'
 
+import login from '../container/login/reducer'
+
 export default combineReducers({
 	recommend,
 	playlist,
 	album,
 	music,
-	spin
+	spin,
+	login
 })

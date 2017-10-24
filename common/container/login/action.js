@@ -4,7 +4,7 @@ import request from '../../util/request'
 import storage from '../../util/storage'
 
 
-const login = obj => ({ type: LOGIN, obj })
+export const login = obj => ({ type: LOGIN, obj })
 
 
 import encrypt from '../../util/encrypt'
@@ -19,10 +19,14 @@ export const loginAction = (mobile,pwd,callback) => async dispatch => {
     // console.log(a)
     // let data = await request( '../mock/login.json','get',encryptData )
     let data = await request( '/api/login','post',encryptData )
-
+    
     callback(data)
-    dispatch(login({ data }))
-    storage.put('token',JSON.stringify(data))
+
+    if( data.flag ){
+        dispatch(login({ token:data.token }))
+        storage.put('token',JSON.stringify({ token:data.token }))
+    }
+    
     
 }
 

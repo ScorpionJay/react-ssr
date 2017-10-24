@@ -1,37 +1,21 @@
 /**
- * 帐号
+ * account container
  */
 
-import React, { Component } from 'react'
-
-import Tab from '../../component/common/tab'
-import Nav from '../../component/nav/nav'
 
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import AccountComponent from './component'
+import { login } from '../login/action'
 
+const mapStateToProps = state => ({
+	login: state.login,
+	music: state.music
+})
 
-class App extends Component {
+const mapDispatchToProps = dispatch => ({
+	loginAction: bindActionCreators(login, dispatch)
+})
 
-	render() {
-		return (
-		
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
-				<Tab name='帐号' history={this.props.history} beat={this.props.music.controll === 'play'} />
-				
-					<div className='container'>TODO</div>
-				
-				<Nav />
-			</div>
-			
-		)
-	}
+export default connect(mapStateToProps, mapDispatchToProps)(AccountComponent)
 
-}
-
-function map(state) {
-	return {
-		music: state.music,
-	}
-}
-
-export default connect(map)(App)

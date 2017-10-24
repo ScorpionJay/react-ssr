@@ -1,0 +1,21 @@
+.account{
+
+    
+
+    .item{
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: .1rem solid #999;
+        color:#333
+    }
+
+    .btn{
+        text-align: center;
+        padding: 1rem 1rem;
+        margin: 1rem .5rem;
+        background: #ce3d3e;
+        color:#fff
+    }
+}

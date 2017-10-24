@@ -94,7 +94,11 @@ let clientConfig = {
             filename: '[name].[hash:5].js'
         }),
         new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false },
+            compress: {
+                warnings: false,
+                drop_debugger: true,
+                drop_console: true
+            },
             output: {
                 comments: false,
             },

@@ -15,7 +15,7 @@ export default class Login extends Component {
         super(props)
 
         this.state = {
-            mobile: '18521303750',
+            mobile: '18500000000',
             pwd: '1111qqqq',
             pwdType: false,
             message:null
@@ -39,10 +39,10 @@ export default class Login extends Component {
 
     callback(v){
         const { history } = this.props
-        if( v ){
+        if( v.flag ){
             history.replace('/')
         }else{
-            this.setState({message:'手机号或密码错误'})
+            this.setState({message:v.msg})
             setTimeout(()=>this.setState({message:null}) ,1000)
         }
     }

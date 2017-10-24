@@ -4,18 +4,18 @@
 export default {
 
     put: function (key, value) {
-        window.localStorage.setItem(key, value)
+        localStorage.setItem(key, value)
     },
 
     get: function (key) {
-        return window.localStorage.getItem(key)
+        return localStorage.getItem(key)
     },
 
     remove: function (key) {
-        return window.localStorage.removeItem(key)
+        return localStorage.removeItem(key)
     },
 
     clear: function () {
-        window.localStorage.clear()
+        localStorage.clear()
     }
 }

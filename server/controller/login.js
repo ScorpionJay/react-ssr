@@ -6,9 +6,9 @@ import request from '../util/request'
 import config from '../util/config'
 import NodeRSA from 'node-rsa'
 import CryptoJS from 'crypto-js'
+import jwt from 'jsonwebtoken'
 
 const login = async (ctx, next) => {
-    console.log('get data', ctx.request.body)
     let data = ctx.request.body
     // need to validate
 
@@ -33,21 +33,36 @@ const login = async (ctx, next) => {
     serverKey.setOptions({ encryptionScheme: 'pkcs1' })
     let key = serverKey.decrypt(data.key, 'utf8')
     let base64 = CryptoJS.enc.Utf8.parse(key)
-    let Dencrypted = CryptoJS.TripleDES.decrypt(data.str, base64, {
+    let dencrypted = CryptoJS.TripleDES.decrypt(data.str, base64, {
         iv: CryptoJS.enc.Utf8.parse('01234567'),
         mode: CryptoJS.mode.CBC,
         padding: CryptoJS.pad.Pkcs7
     }
     )
-    let pwd =  Dencrypted.toString(CryptoJS.enc.Utf8)
-    console.log('解密：',pwd)
+    let pwd = dencrypted.toString(CryptoJS.enc.Utf8)
 
-    // check pwd
-
-
-    // jwt
-    // let data = await request(config.banner)
-    ctx.body = {token:'asdfaf'}
+    // check pwd 
+    let result = {} 
+    if( pwd === '1111qqqq' ){
+        let token = jwt.sign({ foo: 'bar' }, 'ttttttt')
+        
+        // console.log('token', token)
+    
+        // let decoded = jwt.verify(token, 'ttttttt')
+    
+        // console.log('decoded', decoded)
+        result = {
+            flag:true,
+            token:token
+        }
+    }else{
+        console.log('密码错误')
+        result = {
+            flag:false,
+            msg:'密码错误'
+        }
+    }
+    ctx.body = result
 }
 
 
