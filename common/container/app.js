@@ -25,6 +25,7 @@ import Audio from '../component/music/audio'
 import Album from './album/'
 import Play from './play'
 import Login from './login'
+import About from './about'
 
 import Spin from '../component/common/spin'
 
@@ -132,6 +133,7 @@ class Main extends Component {
 							<Route path='/play/:id' component={Play} />
 							<Route path='/play' component={Play} />
 							<Route path='/Login' component={Login} />
+							<Route path='/about' component={About} />
 							<Route render={() => (<Redirect to="/discover" />)} />
 						</Switch>
 					</div>

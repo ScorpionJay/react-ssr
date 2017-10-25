@@ -79,10 +79,10 @@ class Play extends Component {
 
   goBack() {
     const { dispatch, album, history } = this.props
-    if (album.list.length > 1) {
-      history.goBack()
-    } else {
+    if( history.action === "POP" ){
       history.push('/')
+    }else{
+      history.goBack()
     }
   }
 

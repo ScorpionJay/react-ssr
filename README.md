@@ -139,3 +139,8 @@ https://github.com/aribouius/asset-require-hook
 
 ## REF
 http://andrewhfarmer.com/server-side-render/
+
+
+
+## auth
+auth by token 

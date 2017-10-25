@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken'
 
 const login = async (ctx, next) => {
     let data = ctx.request.body
+    console.log('data',data)
     // need to validate
 
     // 使用rsa加密密钥
