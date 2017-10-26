@@ -58,6 +58,6 @@ export default class AccountComponent extends Component {
 const Item = ({ icon, name,fun }) => (
     <div className='item' onClick={() => fun()}>
         <div>{name}</div>
-        <div><i className='right-arrow'></i></div>
+        <div><i className='rightArrow'></i></div>
     </div>
 )

@@ -25,7 +25,7 @@ const clientRoute = async (ctx, next) => {
                     "recommend": {
                         "recommend": {
                             "banner": JSON.parse(data).data.info,
-                            "recommendMusics": JSON.parse(music).plist.list.info.slice(0,6)
+                            "recommendMusics": JSON.parse(music).plist.list.info.slice(0, 6)
                         }
                     }
                 }
@@ -41,9 +41,9 @@ const clientRoute = async (ctx, next) => {
                     }
                 }
             )
-        }else if (url.indexOf('/discover/album/') != -1) {
-            let id = url.substring(url.lastIndexOf('/')+1)
-            let music = await request( config.playListAPI.replace('id', id))
+        } else if (url.indexOf('/discover/album/') != -1) {
+            let id = url.substring(url.lastIndexOf('/') + 1)
+            let music = await request(config.playListAPI.replace('id', id))
             let data = JSON.parse(music)
             let d = {
                 list: data.list.list.info,
