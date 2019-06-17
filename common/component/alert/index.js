@@ -1,12 +1,10 @@
-import React from 'react'
-import './style.scss'
+import React from "react";
+import "./style.scss";
 
-const Alert = ({data}) => (
-    <div className='alert'>
-        <span>
-            {data}
-        </span>
-    </div>
-)
+const Alert = ({ data }) => (
+  <div className="alert">
+    <span>{data}</span>
+  </div>
+);
 
-export default Alert
+export default Alert;

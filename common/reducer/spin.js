@@ -1,19 +1,19 @@
-import { combineReducers } from 'redux'
-import { SPIN_SHOW, SPIN_HIDDEN } from '../action/spin'
+import { combineReducers } from "redux";
+import { SPIN_SHOW, SPIN_HIDDEN } from "../action/spin";
 
 function spin(state = false, action) {
   switch (action.type) {
     case SPIN_SHOW:
-      return true
+      return true;
     case SPIN_HIDDEN:
-      return false
+      return false;
     default:
-      return state
+      return state;
   }
 }
 
 const todoApp = combineReducers({
   spin
-})
+});
 
-export default todoApp
+export default todoApp;

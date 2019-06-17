@@ -1,8 +1,8 @@
 /**
  * 动画组件
  */
-import React, { Component } from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import React, { Component } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 // export default class Fade extends Component {
 // 	render() {
@@ -22,20 +22,21 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 // }
 
 const Fade = ({ children }) => (
-	<div className='fade'>
-	<TransitionGroup  >
-		<CSSTransition
-			appear={true}
-			enter={true}
-			classNames="fade"
-			timeout={{
- enter: 300,
- exit: 0,
-}}>
-			{children}
-		</CSSTransition>
-	</TransitionGroup>
-	</div>
-)
+  <div className="fade">
+    <TransitionGroup>
+      <CSSTransition
+        appear={true}
+        enter={true}
+        classNames="fade"
+        timeout={{
+          enter: 300,
+          exit: 0
+        }}
+      >
+        {children}
+      </CSSTransition>
+    </TransitionGroup>
+  </div>
+);
 
-export default Fade
+export default Fade;

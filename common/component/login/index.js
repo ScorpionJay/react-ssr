@@ -2,5 +2,4 @@
  * login comtainer
  */
 
- import React,{Compoment} from 'react'
-
+import React, { Compoment } from "react";

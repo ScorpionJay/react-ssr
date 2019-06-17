@@ -1,21 +1,20 @@
 /**
-* use localStorage to persistence
-*/
+ * use localStorage to persistence
+ */
 export default {
+  put: function(key, value) {
+    localStorage.setItem(key, value);
+  },
 
-    put: function (key, value) {
-        localStorage.setItem(key, value)
-    },
+  get: function(key) {
+    return localStorage.getItem(key);
+  },
 
-    get: function (key) {
-        return localStorage.getItem(key)
-    },
+  remove: function(key) {
+    return localStorage.removeItem(key);
+  },
 
-    remove: function (key) {
-        return localStorage.removeItem(key)
-    },
-
-    clear: function () {
-        localStorage.clear()
-    }
-}
+  clear: function() {
+    localStorage.clear();
+  }
+};

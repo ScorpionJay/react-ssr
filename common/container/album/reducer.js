@@ -1,9 +1,9 @@
 /**
-* album reducer
-*/
+ * album reducer
+ */
 
-import { combineReducers } from 'redux'
-import { ALBUM } from './action'
+import { combineReducers } from "redux";
+import { ALBUM } from "./action";
 
 let vo = {
   list: [],
@@ -14,27 +14,26 @@ let vo = {
     singername: "",
     intro: "",
     songcount: 0,
-    imgurl: '',
+    imgurl: "",
     specialid: 0,
     suid: 0,
     collectcount: 0,
     playcount: 0,
     slid: 0
   }
-}
-
+};
 
 function album(state = vo, action) {
   switch (action.type) {
     case ALBUM:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
 
 const Reducers = combineReducers({
   album
-})
+});
 
-export default Reducers
+export default Reducers;

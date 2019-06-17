@@ -1,16 +1,14 @@
-import { LOGIN } from './action'
+import { LOGIN } from "./action";
 
-const inteState = {
-   
-}
+const inteState = {};
 
 const login = (state = inteState, action) => {
-    switch (action.type) {
-        case LOGIN:
-            return action.obj
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case LOGIN:
+      return action.obj;
+    default:
+      return state;
+  }
+};
 
-export default login
+export default login;

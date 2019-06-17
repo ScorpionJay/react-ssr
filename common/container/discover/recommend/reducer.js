@@ -1,29 +1,30 @@
 /**
-* home reducer
-*/
+ * home reducer
+ */
 
-import { combineReducers } from 'redux'
-import { RECOMMEND } from './action'
+import { combineReducers } from "redux";
+import { RECOMMEND } from "./action";
 let homeVo = {
-  banner: [{
-    link: '',
-    imgurl: ''
-  }],
+  banner: [
+    {
+      link: "",
+      imgurl: ""
+    }
+  ],
   recommendMusics: []
-}
+};
 
 function recommend(state = homeVo, action) {
   switch (action.type) {
     case RECOMMEND:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
 
-
 const Reducers = combineReducers({
   recommend
-})
+});
 
-export default Reducers
+export default Reducers;

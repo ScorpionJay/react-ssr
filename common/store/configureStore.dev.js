@@ -1,10 +1,9 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import { createLogger } from 'redux-logger'
-import reducers from '../reducer'
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { createLogger } from "redux-logger";
+import reducers from "../reducer";
 
-
-import {login} from '../container/login/action'
+import { login } from "../container/login/action";
 // import DevTools from '../container/DevTools'
 // import {persistState} from 'redux-devtools'
 
@@ -19,25 +18,23 @@ import {login} from '../container/login/action'
 //   return (matches && matches.length > 0) ? matches[1] : null;
 // }
 
-
 let middlware;
-if (process.env.NODE_ENV === 'production') {
-	middlware = applyMiddleware(thunk)
+if (process.env.NODE_ENV === "production") {
+  middlware = applyMiddleware(thunk);
 } else {
-	middlware = applyMiddleware(thunk, createLogger())
+  middlware = applyMiddleware(thunk, createLogger());
 }
 
-
 const composeEnhancers =
-	typeof window === 'object' &&
-		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-			// Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-		}) : compose;
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+      })
+    : compose;
 
 const enhancer = composeEnhancers(
-	middlware,
-	// other store enhancers if any
+  middlware
+  // other store enhancers if any
 );
 
 // const enhancer = compose(
@@ -47,42 +44,39 @@ const enhancer = composeEnhancers(
 //   DevTools.instrument()
 // )
 
-const store = function (initialState) {
-	let createStoreWithMiddleware;
-	// if (process.env.NODE_ENV === 'production') {
-	// 	createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-	// }else{
-	// 	const logger = createLogger();
-	// 	createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
-	// }
-	// let store = createStoreWithMiddleware(reducers, initialState);
+const store = function(initialState) {
+  let createStoreWithMiddleware;
+  // if (process.env.NODE_ENV === 'production') {
+  // 	createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+  // }else{
+  // 	const logger = createLogger();
+  // 	createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
+  // }
+  // let store = createStoreWithMiddleware(reducers, initialState);
 
-	// createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore)
-	// let store = createStoreWithMiddleware(reducers, initialState)
+  // createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore)
+  // let store = createStoreWithMiddleware(reducers, initialState)
 
+  const store = createStore(reducers, initialState, enhancer);
 
-	const store = createStore(reducers, initialState, enhancer)
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept("../reducer", () => {
+      const nextReducer = require("../reducer");
 
-	if (module.hot) {
-		// Enable Webpack hot module replacement for reducers
-		module.hot.accept('../reducer', () => {
-			const nextReducer = require('../reducer');
+      store.replaceReducer(nextReducer);
+    });
+  }
 
-			store.replaceReducer(nextReducer);
-		});
-	}
+  if (typeof window != "undefined") {
+    let storage = require("../util/storage").default;
+    let token = storage.get("token");
+    if (token) {
+      store.dispatch(login(JSON.parse(token)));
+    }
+  }
 
+  return store;
+};
 
-	if( typeof window != 'undefined'){
-		let storage = require('../util/storage').default
-		let token = storage.get('token')
-		if( token ){
-			store.dispatch(login(JSON.parse(token)))
-		}
-		
-	}
-
-	return store
-}
-
-export default store
+export default store;

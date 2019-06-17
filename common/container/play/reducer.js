@@ -1,85 +1,102 @@
-import { combineReducers } from 'redux'
-import { MUSICBOX, MUSICBOXADD, CURRENTMUSIC, KRC, PLAY, PAUSE, CHANGETIME, PRE, NEXT, FIRSTTIME } from './action'
+import { combineReducers } from "redux";
+import {
+  MUSICBOX,
+  MUSICBOXADD,
+  CURRENTMUSIC,
+  KRC,
+  PLAY,
+  PAUSE,
+  CHANGETIME,
+  PRE,
+  NEXT,
+  FIRSTTIME
+} from "./action";
 
 let musicPlayListVo = [
   {
-    hash: '',
-    name: ''
+    hash: "",
+    name: ""
   }
-]
+];
 
 function musicList(state = musicPlayListVo, action) {
   switch (action.type) {
-    case MUSICBOX:// 初始化音乐盒
-      return state
-    case MUSICBOXADD:// 音乐盒添加音乐
-      let flag = true
+    case MUSICBOX: // 初始化音乐盒
+      return state;
+    case MUSICBOXADD: // 音乐盒添加音乐
+      let flag = true;
       for (let i = 0; i < state.length; i++) {
         if (state[i].hash === action.obj.hash) {
-          flag = false
-          break
+          flag = false;
+          break;
         }
       }
       if (flag) {
-        state = state[0].hash === '' ? [].concat(action.obj) : state.concat(action.obj)
+        state =
+          state[0].hash === ""
+            ? [].concat(action.obj)
+            : state.concat(action.obj);
       }
-      return state
+      return state;
     default:
-      return state
+      return state;
   }
 }
 
 let currentMusicVo = {
-  hash: '',
-  name: '',
-  krc: [{ time: 0, str: '' }],
-  singerName: '',
-  songName: '',
+  hash: "",
+  name: "",
+  krc: [{ time: 0, str: "" }],
+  singerName: "",
+  songName: "",
   url: null,
-  imgUrl: '',
+  imgUrl: "",
   duration: 0
-}
+};
 function currentMusic(state = currentMusicVo, action) {
   switch (action.type) {
     case CURRENTMUSIC:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
 
 function time(state = { currentTime: 0, changeTimeFlag: false }, action) {
   switch (action.type) {
     case CHANGETIME:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
 
-function controll(state = 'pause', action) {
+function controll(state = "pause", action) {
   switch (action.type) {
     case PLAY:
-      return action.obj
+      return action.obj;
     case PAUSE:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
-
 
 function firstTime(state = true, action) {
   switch (action.type) {
     case FIRSTTIME:
-      return action.obj
+      return action.obj;
     default:
-      return state
+      return state;
   }
 }
 
 const Reducers = combineReducers({
-  musicList, currentMusic, time, controll, firstTime
-})
+  musicList,
+  currentMusic,
+  time,
+  controll,
+  firstTime
+});
 
-export default Reducers
+export default Reducers;

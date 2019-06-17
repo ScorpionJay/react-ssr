@@ -7,7 +7,8 @@
     "dev": "cross-env NODE_ENV=development nodemon ./server/index.dev.js --watch server --watch config",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./build/webpack.prod.js",
     "start": "node ./dist/server/server.js",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "prettier": "prettier --write  \"./**/*.{js,jsx,css,less,md,json}\""
   },
   "keywords": [
     "react",
@@ -73,6 +74,7 @@
     "node-sass": "^4.5.3",
     "null-loader": "^3.0.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
     "progress-bar-webpack-plugin": "^1.9.3",
     "react-hot-loader": "^4.11.1",
     "redux-logger": "^3.0.6",

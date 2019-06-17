@@ -2,21 +2,20 @@
  * discover index
  */
 
-import React, { Component } from 'react'
-import { Route, Switch, Redirect, NavLink } from 'react-router-dom'
-import Bundle from '../../component/bundle'
+import React, { Component } from "react";
+import { Route, Switch, Redirect, NavLink } from "react-router-dom";
+import Bundle from "../../component/bundle";
 
-import Recommend from './recommend'
-import Playlist from './playlist'
-import Rank from './rank'
-import Mv from './mv'
+import Recommend from "./recommend";
+import Playlist from "./playlist";
+import Rank from "./rank";
+import Mv from "./mv";
 
-import Nav from '../../component/nav/nav'
+import Nav from "../../component/nav/nav";
 
+import { connect } from "react-redux";
 
-import { connect } from 'react-redux'
-
-import './index.scss'
+import "./index.scss";
 
 // const Recommend = (match) => (
 //     <Bundle load={loadRecommend}>
@@ -42,7 +41,6 @@ import './index.scss'
 //     </Bundle>
 // )
 
-
 // export default class App extends Component {
 
 // 	// componentDidMount() {
@@ -66,97 +64,87 @@ import './index.scss'
 
 // }
 
-import Tab from '../../component/common/tab'
+import Tab from "../../component/common/tab";
 
 const tabs = [
-    { name: '个性推荐', url: 'recommend' },
-    { name: '歌单', url: 'playlist' },
-    { name: '排行榜', url: 'rank' },
-    { name: 'MV', url: 'mv' }
-]
+  { name: "个性推荐", url: "recommend" },
+  { name: "歌单", url: "playlist" },
+  { name: "排行榜", url: "rank" },
+  { name: "MV", url: "mv" }
+];
 
 class discoverIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tabIndex: 0
+    };
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = ({
-            tabIndex: 0,
-            
-        })
-    }
+  componentDidMount() {
+    let i = tabs.findIndex(
+      i => this.props.location.pathname.indexOf(i.url) != -1
+    );
+    this.setState({
+      tabIndex: i === -1 ? 0 : i
+    });
+  }
 
+  //let a = tabs.findIndex((i) => match.url.indexOf( i.url ) !== -1 )
+  //this.setState({tabIndex: 0})
 
-    componentDidMount() {
-        let i = tabs.findIndex((i) => this.props.location.pathname.indexOf(i.url) != -1)
-        this.setState({
-            tabIndex: i === -1 ? 0 : i
-        })
-    }
+  changeTab(index) {
+    this.props.history.push("/discover/" + tabs[index].url);
+    this.setState({ tabIndex: index });
+  }
 
-    //let a = tabs.findIndex((i) => match.url.indexOf( i.url ) !== -1 )
-    //this.setState({tabIndex: 0})
+  render() {
+    const { history, match, music } = this.props;
+    return (
+      <div className="discover">
+        <Tab name="首页" history={history} beat={music.controll === "play"} />
 
-    changeTab(index) {
-        this.props.history.push('/discover/' + tabs[index].url)
-        this.setState({ tabIndex: index })
-    }
-
-    render() {
-        const { history, match, music } = this.props
-        return (
-            <div className='discover'>
-
-                <Tab name='首页' history={history} beat={music.controll === 'play'} />
-
-                <div className='nav'>
-                    <div className='nav-tab'>
-                        {
-                            tabs.map((obj, index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        onClick={() => this.changeTab(index)}
-                                    >
-                                        {obj.name}
-                                    </div>
-                                )
-                            }
-
-                            )
-                        }
-                    </div>
-                    <div className="highlight" style={{ transform: `translateX(${this.state.tabIndex}00%)` }}></div>
+        <div className="nav">
+          <div className="nav-tab">
+            {tabs.map((obj, index) => {
+              return (
+                <div key={index} onClick={() => this.changeTab(index)}>
+                  {obj.name}
                 </div>
+              );
+            })}
+          </div>
+          <div
+            className="highlight"
+            style={{ transform: `translateX(${this.state.tabIndex}00%)` }}
+          ></div>
+        </div>
 
+        <div className="discover">
+          <Switch>
+            <Route
+              exact
+              path={match.url}
+              render={() => <Redirect to={`${match.url}/recommend`} />}
+            />
+            <Route path={`${match.url}/recommend`} component={Recommend} />
+            <Route path={`${match.url}/playlist`} component={Playlist} />
+            <Route path={`${match.url}/rank`} component={Rank} />
+            <Route path={`${match.url}/mv`} component={Mv} />
+            <Route render={() => <Redirect to={`${match.url}/recommend`} />} />
+          </Switch>
+        </div>
 
-                <div className='discover'>
-                    <Switch>
-                        <Route exact path={match.url} render={() => (<Redirect to={`${match.url}/recommend`} />)} />
-                        <Route path={`${match.url}/recommend`} component={Recommend} />
-                        <Route path={`${match.url}/playlist`} component={Playlist} />
-                        <Route path={`${match.url}/rank`} component={Rank} />
-                        <Route path={`${match.url}/mv`} component={Mv} />
-                        <Route render={() => (<Redirect to={`${match.url}/recommend`} />)} />
-                    </Switch>
-                </div>
-
-
-
-                <Nav />
-
-            </div>
-        )
-    }
-
+        <Nav />
+      </div>
+    );
+  }
 }
-
-
-
 
 function map(state) {
-    return {
-        music: state.music,
-    }
+  return {
+    music: state.music
+  };
 }
 
-export default connect(map)(discoverIndex)
+export default connect(map)(discoverIndex);

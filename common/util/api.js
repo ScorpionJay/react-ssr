@@ -1,32 +1,33 @@
 /**
-* fetch
-*/
+ * fetch
+ */
 
-import async from 'async'
-require("babel-polyfill")
+import async from "async";
+require("babel-polyfill");
 // import Storage from './storage'
 
-export default async (url, method = 'get', data = {}, headers = {  }) => {
-  console.log('url',url)
-  if (window.fetch) {//浏览器支持fetch
+export default async (url, method = "get", data = {}, headers = {}) => {
+  console.log("url", url);
+  if (window.fetch) {
+    //浏览器支持fetch
     let requestConfig = {
       method: method,
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json"
       }
-    }
+    };
 
-    if (method === 'post') {
-      Object.defineProperty(requestConfig, 'body', { value: data });
+    if (method === "post") {
+      Object.defineProperty(requestConfig, "body", { value: data });
     } else {
-      let dataStr = '';
+      let dataStr = "";
       for (let [k, v] of Object.entries(data)) {
         dataStr += `${k}=${v}&`;
       }
 
-      if (dataStr !== '') {
-        url = url + '?' + dataStr.substr(0, dataStr.lastIndexOf('&'));
+      if (dataStr !== "") {
+        url = url + "?" + dataStr.substr(0, dataStr.lastIndexOf("&"));
       }
     }
 
@@ -42,59 +43,62 @@ export default async (url, method = 'get', data = {}, headers = {  }) => {
       if (response.status === 401) {
         // throw new Error('token 过期');
         // Storage.clear();
-        location.href = '/';
+        location.href = "/";
       } else {
         let data;
 
-
         switch (requestConfig.headers.Accept) {
-          case 'application/json':
-            data = response.json()
+          case "application/json":
+            data = response.json();
             break;
-          case 'text/html':
-            data = response.text()
+          case "text/html":
+            data = response.text();
             break;
         }
-        return data
+        return data;
       }
     } catch (error) {
-      console.log('error', error)
-      throw new Error(error)
+      console.log("error", error);
+      throw new Error(error);
     }
-  } else {//浏览器不支持fetch
+  } else {
+    //浏览器不支持fetch
     let requestObj;
     if (window.XMLHttpRequest) {
       requestObj = new XMLHttpRequest();
     } else {
-      requestObj = new ActiveXObject;
+      requestObj = new ActiveXObject();
     }
 
-    let sendData = '';
-    if (method == 'post') {
+    let sendData = "";
+    if (method == "post") {
       sendData = JSON.stringify(data);
     } else {
-      let dataStr = '';
+      let dataStr = "";
       for (let [k, v] of Object.entries(data)) {
         dataStr += `${k}=${v}&`;
       }
 
-      if (dataStr !== '') {
-        url = url + '?' + dataStr.substr(0, dataStr.lastIndexOf('&'));
+      if (dataStr !== "") {
+        url = url + "?" + dataStr.substr(0, dataStr.lastIndexOf("&"));
       }
     }
 
     return new Promise((resolve, reject) => {
       requestObj.open(method, url, true);
-      requestObj.setRequestHeader('Content-Type', 'application/json');
-      requestObj.setRequestHeader('Accept', headers.Accept || 'application/json');
+      requestObj.setRequestHeader("Content-Type", "application/json");
+      requestObj.setRequestHeader(
+        "Accept",
+        headers.Accept || "application/json"
+      );
       requestObj.send(sendData);
       requestObj.onreadystatechange = () => {
         if (requestObj.readyState == 4) {
           if (requestObj.status == 200) {
-            let obj = requestObj.response
-            if (typeof obj !== 'object') {
+            let obj = requestObj.response;
+            if (typeof obj !== "object") {
               switch (headers.Accept) {
-                case 'text/html':
+                case "text/html":
                   obj = obj;
                   break;
                 default:
@@ -102,14 +106,13 @@ export default async (url, method = 'get', data = {}, headers = {  }) => {
                   break;
               }
             }
-            console.log(obj)
+            console.log(obj);
             resolve(obj);
           } else {
             //reject()
           }
         }
-      }
+      };
     });
   }
-
-}
+};
