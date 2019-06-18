@@ -2,10 +2,10 @@
  * react路由
  */
 
-import React, { Component, PropTypes } from "react";
+import React from "react";
 import { renderToString } from "react-dom/server";
 import { Provider } from "react-redux";
-import { Router, StaticRouter } from "react-router";
+import { StaticRouter } from "react-router";
 import App from "../common/container/app";
 import configureStore from "../common/store";
 

@@ -1,5 +1,4 @@
-import async from "async";
-require("babel-polyfill");
+// require("babel-polyfill");
 import Storage from "./storage";
 //url, method = 'get', data = {}, headers = { 'Content-Type': 'application/json' }
 export default async config => {

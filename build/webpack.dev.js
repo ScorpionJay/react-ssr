@@ -1,12 +1,14 @@
 /**
- * 开发环境webpack配置
+ * @author Jay
+ * @date 2017-8-1
+ * @description  webpack develop config
  */
 
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   context: path.join(__dirname, ".."),
@@ -88,7 +90,13 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // publicPath: "../",
+              hmr: process.env.NODE_ENV === "development"
+            }
+          },
           "css-loader",
           {
             loader: "postcss-loader",
@@ -107,11 +115,10 @@ module.exports = {
     ]
   },
   plugins: [
-    // new ExtractTextPlugin({
-    //   filename: "css/style.css",
-    //   disable: false,
-    //   allChunks: true
-    // }),
+    new MiniCssExtractPlugin({
+      filename: "css/[name].css",
+      chunkFilename: "css/[id].css"
+    }),
     // new webpack.optimize.CommonsChunkPlugin({
     //     names: ['vendor', 'manifest'],
     //     filename: '[name].js'

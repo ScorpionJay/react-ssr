@@ -2,8 +2,7 @@
  * fetch
  */
 
-import async from "async";
-require("babel-polyfill");
+// require("babel-polyfill");
 // import Storage from './storage'
 
 export default async (url, method = "get", data = {}, headers = {}) => {

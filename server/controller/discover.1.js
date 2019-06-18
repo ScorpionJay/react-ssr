@@ -61,5 +61,4 @@ const musicDetail = async (ctx, next) => {
   ctx.body = vo;
 };
 
-console.log(banner);
 export default { banner, music, album, musicDetail };

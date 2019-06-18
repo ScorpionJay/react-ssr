@@ -1,8 +1,10 @@
 ﻿/**
- * client index
+ * @author Jay
+ * @date  2017-8-1
+ * @description client index
  */
 
-import React, { Component } from "react";
+import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -22,7 +24,7 @@ render(
 
 import { AppContainer } from "react-hot-loader";
 
-const renderIndex = Component => {
+const renderIndex = () => {
   render(
     <AppContainer>
       <Provider store={configureStore(window.REDUX_STATE)}>

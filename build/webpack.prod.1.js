@@ -1,9 +1,25 @@
+/**
+ * @author Jay
+ * @date 2017-8-1
+ * @description webpack production config
+ */
+
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const fs = require("fs");
+
+function getExternals() {
+  return fs
+    .readdirSync(path.resolve(__dirname, "../node_modules"))
+    .filter(filename => !filename.includes(".bin"))
+    .reduce((externals, filename) => {
+      externals[filename] = `commonjs ${filename}`;
+      return externals;
+    }, {});
+}
 
 // 客户端配置
 let clientConfig = {
@@ -24,13 +40,13 @@ let clientConfig = {
       {
         test: /\.js[x]?$/,
         loader: "babel-loader",
-        exclude: /(node_modules)/,
-        options: {
-          cacheDirectory: true,
-          babelrc: false,
-          presets: [["@babel/env"], "@babel/react"]
-          // plugins: ["@babel/plugin-transform-runtime"]
-        }
+        exclude: /(node_modules)/
+        // options: {
+        //   cacheDirectory: true,
+        //   babelrc: false,
+        //   presets: [["@babel/env"], "@babel/react"]
+        //   // plugins: ["@babel/plugin-transform-runtime"]
+        // }
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -114,26 +130,9 @@ let clientConfig = {
   target: "web"
 };
 
-//////////////
-
-function getExternals() {
-  return fs
-    .readdirSync(path.resolve(__dirname, "../node_modules"))
-    .filter(filename => !filename.includes(".bin"))
-    .reduce((externals, filename) => {
-      externals[filename] = `commonjs ${filename}`;
-      return externals;
-    }, {});
-}
-
 // 服务端配置
 let serverConfig = {
   mode: "production",
-  target: "node",
-  node: {
-    __filename: true,
-    __dirname: true
-  },
   context: path.resolve(__dirname, ".."),
   entry: {
     server: "./server/index.prod"
@@ -142,6 +141,11 @@ let serverConfig = {
     path: path.resolve(__dirname, "../dist/server"),
     filename: "[name].js"
   },
+  target: "node",
+  node: {
+    __filename: true,
+    __dirname: true
+  },
   module: {
     rules: [
       {
@@ -149,18 +153,17 @@ let serverConfig = {
         loader: "babel-loader",
         exclude: /(node_modules)/,
         options: {
-          presets: [
-            [
-              "@babel/env",
-              {
-                targets: {
-                  node: "current"
-                }
-              }
-            ],
-            "@babel/react"
-          ],
-          plugins: ["add-module-exports", "@babel/plugin-transform-runtime"]
+          // presets: [
+          //   [
+          //     "@babel/env",
+          //     {
+          //       node: "current"
+          //       // "modules": false
+          //     }
+          //   ],
+          //   "@babel/react"
+          // ]
+          // plugins: ["@babel/plugin-transform-runtime", "add-module-exports"]
         }
       },
       {
@@ -212,5 +215,4 @@ let serverConfig = {
   externals: getExternals()
 };
 
-// module.exports = [serverConfig];
 module.exports = [clientConfig, serverConfig];

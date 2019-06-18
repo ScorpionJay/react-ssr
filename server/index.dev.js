@@ -3,7 +3,7 @@
  */
 
 // 转换新的api
-require("babel-polyfill");
+// require("babel-polyfill");
 
 // map
 require("source-map-support").install();
