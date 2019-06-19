@@ -66,27 +66,6 @@ module.exports = {
         test: /\.html$/,
         use: "html-loader?minimize=false"
       },
-      //   {
-      //     test: /\.scss$/,
-      //     use: ExtractTextPlugin.extract({
-      //       fallback: "style-loader",
-      //       use: [
-      //         "css-loader",
-      //         {
-      //           loader: "postcss-loader",
-      //           options: {
-      //             ident: "postcss",
-      //             plugins: [
-      //               // require('postcss-import')(),
-      //               require("autoprefixer")()
-      //             ]
-      //           }
-      //         },
-      //         "sass-loader"
-      //       ],
-      //       publicPath: "/"
-      //     })
-      //   }
       {
         test: /\.scss$/,
         use: [

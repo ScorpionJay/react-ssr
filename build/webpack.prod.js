@@ -1,12 +1,19 @@
+/**
+ * @author Jay
+ * @date 2019-6-19
+ * @description  webpack production config
+ */
+
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
-const fs = require("fs");
 
-// 客户端配置
+/**
+ * client config
+ */
 let clientConfig = {
   mode: "production",
   context: path.resolve(__dirname, ".."),
@@ -69,11 +76,6 @@ let clientConfig = {
     ]
   },
   plugins: [
-    // new ExtractTextPlugin({
-    //   filename: "css/style.[hash:5].css",
-    //   disable: false,
-    //   allChunks: true
-    // }),
     new MiniCssExtractPlugin({
       filename: "css/style.[hash:5].css",
       chunkFilename: "css/[id].[hash:5]css"
@@ -115,7 +117,9 @@ let clientConfig = {
   target: "web"
 };
 
-// 服务端配置
+/**
+ * server config
+ */
 let serverConfig = {
   mode: "production",
   target: "node",

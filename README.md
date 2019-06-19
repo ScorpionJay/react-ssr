@@ -1,9 +1,10 @@
-# react 技术栈
+# react ssr
 
 ## how to run
 
 ```
 npm i
+
 npm run dev
 
 npm run build
@@ -41,7 +42,7 @@ npm run start
 - react
 - react-router
 - redux
-- webpack2
+- webpack
 - koa2
 
 ### [koa2](https://koajs.com/)
@@ -141,7 +142,7 @@ https://github.com/aribouius/asset-require-hook
 
 ## 时序图
 
-![时序图](http://odyv5xg88.bkt.clouddn.com/react-ssr.png)
+![时序图](docs/react-ssr.png)
 
 ## REF
 
