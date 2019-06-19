@@ -25,13 +25,13 @@ let clientConfig = {
       {
         test: /\.js[x]?$/,
         loader: "babel-loader",
-        exclude: /(node_modules)/
-        // options: {
-        //   cacheDirectory: true,
-        //   babelrc: false,
-        //   presets: [["@babel/env"], "@babel/react"]
-        //   // plugins: ["@babel/plugin-transform-runtime"]
-        // }
+        exclude: /(node_modules)/,
+        options: {
+          cacheDirectory: true,
+          babelrc: false,
+          presets: [["@babel/env"], "@babel/react"]
+          // plugins: ["@babel/plugin-transform-runtime"]
+        }
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -115,6 +115,18 @@ let clientConfig = {
   target: "web"
 };
 
+//////////////
+
+function getExternals() {
+  return fs
+    .readdirSync(path.resolve(__dirname, "../node_modules"))
+    .filter(filename => !filename.includes(".bin"))
+    .reduce((externals, filename) => {
+      externals[filename] = `commonjs ${filename}`;
+      return externals;
+    }, {});
+}
+
 // 服务端配置
 let serverConfig = {
   mode: "production",
@@ -148,8 +160,8 @@ let serverConfig = {
               }
             ],
             "@babel/react"
-          ]
-          // plugins: ["add-module-exports", "@babel/plugin-transform-runtime"]
+          ],
+          plugins: ["add-module-exports", "@babel/plugin-transform-runtime"]
         }
       },
       {
@@ -183,14 +195,24 @@ let serverConfig = {
     ]
   },
   plugins: [
+    // new ExtractTextPlugin({
+    //   filename: "css/style.[hash:5].css",
+    //   disable: false,
+    //   allChunks: true
+    // }),
     new MiniCssExtractPlugin({
       filename: "css/style.[hash:5].css",
       chunkFilename: "css/[id].[hash:5]css"
-    })
+    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: { warnings: false },
+    //   comments: false
+    // }),
+    new ProgressBarPlugin({ summary: false })
   ],
-
   // externals: getExternals()
   externals: [nodeExternals()]
 };
 
+// module.exports = [serverConfig];
 module.exports = [clientConfig, serverConfig];
