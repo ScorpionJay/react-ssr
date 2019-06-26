@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { Route, Switch, Redirect, NavLink } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 //import {HashRouter as Router,Route,Switch,Redirect} from 'react-router-dom'
 
 import Nav from "../component/nav/nav";
@@ -18,8 +18,6 @@ import My from "./my";
 import Friend from "./friend";
 import Account from "./account";
 
-import Bundle from "../component/bundle";
-
 import Audio from "../component/music/audio";
 import Album from "./album/";
 import Play from "./play";
@@ -29,50 +27,6 @@ import About from "./about";
 import Spin from "../component/common/spin";
 
 // components load their module for initial visit
-
-// const Discover = (match) => (
-// 	<Bundle load={loadDiscover}>
-// 		{(Discover) => <Discover {...match} />}
-// 	</Bundle>
-// )
-
-// const My = (match) => (
-// 	<Bundle load={loadMy}>
-// 		{(My) => <My {...match} />}
-// 	</Bundle>
-// )
-
-// const Friend = (match) => (
-// 	<Bundle load={loadFriend}>
-// 		{(Friend) => <Friend {...match} />}
-// 	</Bundle>
-// )
-
-// const Account = (match) => (
-// 	<Bundle load={loadAccount}>
-// 		{(Account) => <Account {...match} />}
-// 	</Bundle>
-// )
-
-// export default class App extends Component {
-
-// 	componentDidMount() {
-// 		// preloads the rest
-// 		// loadDiscover(() => { })
-// 		// loadMy(() => { })
-// 		// loadFriend(() => { })
-// 		// loadAccount(() => { })
-// 	}
-
-// 	render() {
-// 		return (
-// 			<Provider store={store}>
-// 				<MainContainer {...this.props} />
-// 			</Provider>
-// 		)
-// 	}
-
-// }
 
 import {
   musicBoxAddAPI,
@@ -116,7 +70,8 @@ class Main extends Component {
   render() {
     const { dispatch, musicList, currentMusic, time, controll } = this.props;
     return (
-      <div className="app-container">
+      // <div className="app-container">
+      <React.Fragment>
         <Spin spin={this.props.spin} />
 
         <Audio
@@ -144,7 +99,8 @@ class Main extends Component {
             <Route render={() => <Redirect to="/discover" />} />
           </Switch>
         </div>
-      </div>
+      </React.Fragment>
+      // </div>
     );
   }
 }

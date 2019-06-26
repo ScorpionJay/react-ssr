@@ -24,7 +24,7 @@ const clientRoute = async (ctx, next) => {
         recommend: {
           recommend: {
             banner: JSON.parse(data).data.info,
-            recommendMusics: JSON.parse(music).plist.list.info.slice(0, 6)
+            recommendMusics: JSON.parse(music).plist.list.info.slice(0, 9)
           }
         }
       });

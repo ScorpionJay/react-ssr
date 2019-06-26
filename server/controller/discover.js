@@ -8,7 +8,7 @@ const banner = async (ctx, next) => {
 
 const music = async (ctx, next) => {
   let data = await request(config.music);
-  ctx.body = JSON.parse(data).plist.list.info.slice(0, 6);
+  ctx.body = JSON.parse(data).plist.list.info.slice(0, 9);
 };
 
 const album = async (ctx, next) => {

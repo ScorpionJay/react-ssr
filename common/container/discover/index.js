@@ -3,68 +3,15 @@
  */
 
 import React, { Component } from "react";
-import { Route, Switch, Redirect, NavLink } from "react-router-dom";
-import Bundle from "../../component/bundle";
-
+import { Route, Switch, Redirect } from "react-router-dom";
 import Recommend from "./recommend";
 import Playlist from "./playlist";
 import Rank from "./rank";
 import Mv from "./mv";
-
 import Nav from "../../component/nav/nav";
-
-import { connect } from "react-redux";
-
-import "./index.scss";
-
-// const Recommend = (match) => (
-//     <Bundle load={loadRecommend}>
-//         {(Recommend) => <Recommend {...match} />}
-//     </Bundle>
-// )
-
-// const Playlist = (match) => (
-//     <Bundle load={loadPlaylist}>
-//         {(Recommend) => <Recommend {...match} />}
-//     </Bundle>
-// )
-
-// const Rank = (match) => (
-//     <Bundle load={loadRank}>
-//         {(Recommend) => <Recommend {...match} />}
-//     </Bundle>
-// )
-
-// const Mv = (match) => (
-//     <Bundle load={loadMv}>
-//         {(Recommend) => <Recommend {...match} />}
-//     </Bundle>
-// )
-
-// export default class App extends Component {
-
-// 	// componentDidMount() {
-// 	//     // preloads the rest
-// 	//     loadHome(() => {})
-// 	//     loadAbout(() => {})
-// 	//     loadBlog(() => {})
-// 	//     loadBlogDetail(() => {})
-// 	// }
-
-// 	render() {
-//         console.log(this)
-// 		return (
-//              <Switch>
-//                 <Route exact path='/' render={()=>(<Redirect to="/recommend"/>)} />
-//                 <Route path={`${url}/recommend`} render={()=>(<div>123</div>)}  />
-//                 <Route render={()=><p>404</p>} />
-//             </Switch>
-// 		)
-// 	}
-
-// }
-
 import Tab from "../../component/common/tab";
+import { connect } from "react-redux";
+import "./index.scss";
 
 const tabs = [
   { name: "个性推荐", url: "recommend" },
@@ -120,7 +67,7 @@ class discoverIndex extends Component {
           ></div>
         </div>
 
-        <div className="discover">
+        <div className="discover-content">
           <Switch>
             <Route
               exact
