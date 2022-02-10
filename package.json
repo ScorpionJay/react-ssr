@@ -71,7 +71,7 @@
     "koa-logger": "^3.0.0",
     "koa-webpack-dev-middleware": "^2.0.2",
     "koa-webpack-hot-middleware": "^1.0.3",
-    "node-sass": "^4.5.3",
+    "node-sass": "^7.0.0",
     "null-loader": "^3.0.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.18.2",
